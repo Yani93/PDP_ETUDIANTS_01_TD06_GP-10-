@@ -1,5 +1,6 @@
 #include <Adafruit_Sensor.h>
 #include <DHT.h>
+
 #include <Arduino.h>
 
 // Define the pins that we will use
@@ -8,15 +9,8 @@
 
 
 void setup() {
-
-  DHT dht(SENSOR, DHT11);
+  // put your setup code here, to run once:
   pinMode(LED, OUTPUT);
-
-}
-
-void loop() {
-
-  delay(5000);
 
   // Initialiser une variable pour stocker les résultats de la mesure
   float humidity, temperature;
@@ -35,4 +29,11 @@ void loop() {
   Serial.print(temperature);
   Serial.println("°C");
 
+  // Mettre l'ESP32 en mode deep sleep pour 5s
+  esp_sleep_enable_timer_wakeup(5000000);
+  esp_deep_sleep_start();
+}
+
+void loop() {
+  // Laisser la fonction loop vide
 }
